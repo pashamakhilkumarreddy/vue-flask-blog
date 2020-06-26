@@ -23,21 +23,42 @@
           </router-link>
         </div>
         <div class="navbar-end">
-          <router-link to="/" class="navbar-item">
+          <router-link to="/blog/add" class="navbar-item" v-if="isUserLoggedIn">
+            Add
+          </router-link>
+          <router-link to="/blog" class="navbar-item">
+            Blog
+          </router-link>
+          <router-link to="/login" class="navbar-item">
             Login
           </router-link>
+          <router-link to="/profile" class="navbar-item" v-if="isUserLoggedIn">
+            Profile
+          </router-link>
+          <div class="navbar-item" v-if="isUserLoggedIn">
+            <span class="button is-danger is-light">
+              Logout
+            </span>
+          </div>
         </div>
       </div>
     </nav>
   </header>
 </template>
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Header',
   data() {
     return {
       showMobileNavbar: false,
     };
+  },
+  computed: {
+    ...mapGetters([
+      'isUserLoggedIn',
+    ]),
   },
 };
 </script>
